@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hicham Ahmana | Boot</title>
+  <meta name="description" content="Hicham Ahmana — Web Developer portfolio boot sequence.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="flashLayer" class="flash"></div>
+
+  <!-- ACT 1 & 2: BOOT SEQUENCE -->
+  <div id="act1" class="act active">
+    <div class="boot-content">
+      <h1 class="boot-title">Hicham Ahmana</h1>
+      <div class="progress-bar-container">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+      <div id="terminalLogs" class="terminal-logs"></div>
+    </div>
+  </div>
+
+  <!-- ACT 3: BSOD — compact, no scroll needed -->
+  <div id="act3" class="act">
+    <div class="bsod-container">
+      <div class="sad-face">:(</div>
+      <h2 class="bsod-title">Your PC ran into a problem</h2>
+      <p class="bsod-text">A critical error occurred. The developer loaded is simply too hireable.</p>
+      <p class="bsod-text">Collecting error info... <span id="bsodPercent">0</span>% complete.</p>
+      <div class="bsod-error">
+        <p>Error code: PORTFOLIO_OVERFLOW_EXCEPTION (0x000H1CH4M)</p>
+      </div>
+      <div class="memory-dump">0x23C9E1 0xDA1D93 0xB88F19 0xFCDF0E 0x36F067 0x4F4377 0x2071BE 0x5B51AC 0x1607C9 0x0F24C8 0x47A7BA 0xE03EFE 0xE951FF 0xEF7E93 0x9300DE 0xF342AD 0xF82DF9 0x9F03C8 0xBE6A7E 0x79D5CF 0xE827C5 0x3F6299 0x77BE81 0xBB23D8 0xE7E814 0xB2C2A8 0x25385A 0x9281BD 0x759B7D 0x93CC96 0x4F7099 0x4FEC1E 0x521050 0x917424 0x1127BA 0x9954BF 0x297A74 0x9E01B3 0x7350B5 0x104F05 0x6A36B8 0xD63BFC 0xF69BD3 0xEAB54D 0xE73410 0xEBDDEC 0xD9D54B 0x6EA300 0xE53201 0x09A5A9</div>
+      <button id="rebootBtn" class="reboot-btn">[ REBOOT SYSTEM ]</button>
+    </div>
+  </div>
+
+  <!-- ACT 3.5: REBOOT LOADER -->
+  <div id="act-reboot">
+    <div class="spinner"></div>
+    <div class="reboot-text">HICHAM.OS REBOOTING...</div>
+  </div>
+
+  <script src="js/cinematic.js"></script>
+</body>
+</html>
