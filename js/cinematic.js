@@ -117,6 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
       await delay(50);
     }
 
+    // Audio instance for the soul shatter effect
+    const shatterSound = new Audio("audio/undertale-soul-shatter.mp3");
+    shatterSound.play().catch(e => console.log("Audio playback failed:", e));
+
     // Show reboot loader
     act3.classList.remove("active");
     actReboot.classList.add("active");
