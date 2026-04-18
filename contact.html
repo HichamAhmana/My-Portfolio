@@ -58,11 +58,15 @@
         </span>
       </div>
 
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <input type="text"  id="name"    name="name"    placeholder="Your Name"           required>
-        <input type="email" id="email"   name="email"   placeholder="Your Email"          required>
+      <form class="contact-form" id="contact-form">
+        <!-- Web3Forms access key — replace YOUR_ACCESS_KEY with the one from web3forms.com -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+        <input type="hidden" name="subject" value="New message from your portfolio">
+        <input type="hidden" name="from_name" value="Portfolio Contact Form">
+        <input type="text"  id="name"    name="name"    placeholder="Your Name"                   required>
+        <input type="email" id="email"   name="email"   placeholder="Your Email"                  required>
         <textarea           id="message" name="message" placeholder="Tell me about your project..." required></textarea>
-        <button type="submit" class="btn btn-primary">Send Message</button>
+        <button type="submit" class="btn btn-primary" id="submit-btn">Send Message</button>
       </form>
 
       <p id="form-feedback" style="text-align:center; margin-top:1.5rem; color:var(--c-green); font-size:1.05rem; font-family:'JetBrains Mono',monospace; min-height:1.5rem;"></p>
@@ -87,12 +91,49 @@
   </footer>
 
   <script>
-    function handleSubmit(e) {
+    const form = document.getElementById('contact-form');
+    const btn  = document.getElementById('submit-btn');
+    const fb   = document.getElementById('form-feedback');
+
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-      const fb = document.getElementById("form-feedback");
-      fb.textContent = "✓ Message sent! I'll get back to you soon.";
-      e.target.reset();
-    }
+
+      // Guard: remind dev to add real key
+      if (form.access_key.value === 'YOUR_ACCESS_KEY') {
+        fb.style.color = '#f87171';
+        fb.textContent = '⚠ Please add your Web3Forms access key (see README).';
+        return;
+      }
+
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+      fb.textContent  = '';
+
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res  = await fetch('https://api.web3forms.com/submit', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body:    JSON.stringify(data),
+        });
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          fb.style.color  = 'var(--c-green)';
+          fb.textContent  = '✓ Message sent! I\'ll get back to you soon.';
+          form.reset();
+        } else {
+          throw new Error(json.message || 'Unknown error');
+        }
+      } catch (err) {
+        fb.style.color  = '#f87171';
+        fb.textContent  = '✗ Something went wrong. Please email me directly.';
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = 'Send Message';
+      }
+    });
   </script>
 </body>
 </html>
